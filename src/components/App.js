@@ -26,7 +26,7 @@ class App extends React.Component {
     }
 
     getBusStations(lat, lng) {
-        const ROOT_URL = 'http://transportapi.com/v3/uk/bus/stops/near.json?';
+        const ROOT_URL = 'https://transportapi.com/v3/uk/bus/stops/near.json?';
         const API_KEY = 'a77967152dbe221695eb44eeb9530085';
         const APP_ID = '0100c952';
         const POSITION = `lat=${lat}&lon=${lng}`;
