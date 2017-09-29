@@ -19,8 +19,9 @@
     "react": "15.3.2",
     "react-addons-css-transition-group": "15.3.2",
     "react-dom": "15.3.2",
+    "react-google-maps": "4.11.0",
     "react-router": "4.0.0-alpha.4",
-    "react-google-maps": "4.11.0"
+    "superagent": "^3.6.1"
   },
   "scripts": {
     "start": "react-scripts start",
@@ -33,7 +34,7 @@
   "eslintConfig": {
     "extends": "./node_modules/react-scripts/.eslintrc",
     "globals": {
-        "google": true
+      "google": true
     }
   }
 }
