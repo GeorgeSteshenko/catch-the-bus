@@ -211,6 +211,13 @@ body {
   float: left;
   background-color: #fff;
 }
+@media screen and (max-width: 800px) {
+  .map-wrapper {
+    width: 100%;
+    height: 60%;
+    float: none;
+  }
+}
 .map-wrapper .map-container {
   width: 100%;
   height: 100%;
@@ -221,6 +228,13 @@ body {
   float: right;
   padding: 20px;
   overflow: auto;
+}
+@media screen and (max-width: 800px) {
+  .places-container {
+    width: 100%;
+    height: 40%;
+    float: none;
+  }
 }
 .places-container ul {
   list-style: none;
@@ -246,4 +260,15 @@ body {
 .places-container ul li small {
   display: block;
   color: #a9a9a9;
+}
+.search-box {
+  top: 20px;
+  left: 20px;
+  width: 320px;
+  height: 30px;
+}
+@media screen and (max-width: 640px) {
+  .search-box {
+    width: 100%;
+  }
 }

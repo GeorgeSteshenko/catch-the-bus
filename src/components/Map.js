@@ -29,7 +29,7 @@ class Map extends React.Component {
 
     render(){
         const inputStyle = {
-            "width": "320px",
+            "width": "300px",
             "border": "none",
             "boxShadow": "0 2px 6px rgba(0, 0, 0, 0.3)",
             "fontSize": "16px",
@@ -69,6 +69,7 @@ class Map extends React.Component {
                             ref="searchBox"
                             onPlacesChanged={this.onPlacesChanged}
                             types='(cities)'
+                            defaultValue='WTF'
                         />
                         {markers}
                     </GoogleMap>
