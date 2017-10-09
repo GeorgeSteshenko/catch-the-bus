@@ -1,30 +1,45 @@
 import React from 'react';
-import { GoogleMapLoader, GoogleMap, Marker, SearchBox } from 'react-google-maps';
+import { GoogleMapLoader, GoogleMap, Marker, SearchBox, InfoWindow } from 'react-google-maps';
 
 class Map extends React.Component {
     constructor(props) {
         super(props);
 
         this.state = {
-            center: {
-                lat: 51.501737,
-                lng: -0.108588
-            }
+            center: this.props.center,
+            showingInfoWindow: true,
+            activeMarker: false
         };
 
         this.onPlacesChanged = this.onPlacesChanged.bind(this);
+        this.onInfoWindowClose = this.onInfoWindowClose.bind(this);
+    }
+
+    componentWillReceiveProps = (props) => {
+        this.setState({ center: props.center })
     }
 
     onPlacesChanged() {
         const places = this.refs.searchBox.getPlaces();
-        console.log(places);
 
         const lat = places[0].geometry.location.lat();
         const lng = places[0].geometry.location.lng();
 
-        this.setState({center: {lat, lng}});
+        this.setState({ center: {lat, lng} });
+        this.props.changeCenter(lat, lng);
+    }
 
-        console.log(lat, lng);
+    onMarkerClick = (i) => {
+        this.setState({
+            activeMarker: i
+        });
+    }
+
+    onInfoWindowClose = () => {
+        this.setState({
+            showingInfoWindow: false,
+            activeMarker: null
+        })
     }
 
     render(){
@@ -49,9 +64,23 @@ class Map extends React.Component {
                 }
             }
 
-            // console.log(marker);
-
-            return <Marker key={i} {...marker} />
+            return <Marker
+                        icon={'https://www.westsiderentals.com/images/2016/icons/pin-listingicon.png'}
+                        key={i}
+                        {...marker}
+                        onClick={() => this.onMarkerClick(i)}
+                    >
+                    {this.state.activeMarker === i &&
+                        <InfoWindow
+                            marker={this.state.activeMarker}
+                            onClose={this.onInfoWindowClose}
+                            visible>
+                            <div>
+                                <h2>{stops.name}</h2>
+                            </div>
+                        </InfoWindow>
+                    }
+                    </Marker>
         })
 
         return (
@@ -69,7 +98,7 @@ class Map extends React.Component {
                             ref="searchBox"
                             onPlacesChanged={this.onPlacesChanged}
                             types='(cities)'
-                            defaultValue='WTF'
+                            placeholder="Search Address"
                         />
                         {markers}
                     </GoogleMap>

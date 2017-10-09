@@ -11,18 +11,20 @@ class App extends React.Component {
 
         // getinitialstate
         this.state = {
-            center: {},
-            defaultCenter: {
+            center: {
                 lat: 51.501737,
                 lng: -0.108588
             },
-            location: {},
             stops: []
         }
     }
 
     componentDidMount() {
-        this.getBusStations(51.501737, -0.108588);
+        this.getBusStations(this.state.center.lat, this.state.center.lng);
+    }
+
+    changeCenter = ( lat, lng ) => {
+        this.setState({center: { lat, lng }}, () => this.getBusStations(lat, lng))
     }
 
     getBusStations(lat, lng) {
@@ -43,10 +45,7 @@ class App extends React.Component {
 
                 this.setState({
                     stops,
-                    defaultCenter: {
-                        lat: lat,
-                        lng: lng
-                    }
+                    center: { lat, lng }
                  })
             })
     }
@@ -55,11 +54,11 @@ class App extends React.Component {
 
         return (
             <div>
-                {/* <h1>Cath the Bus!</h1> */}
                 <div className="map-wrapper">
                     <Map
-                        center={this.state.defaultCenter}
+                        center={this.state.center}
                         markers={this.state.stops}
+                        changeCenter={this.changeCenter}
                     />
                 </div>
                 <Places
