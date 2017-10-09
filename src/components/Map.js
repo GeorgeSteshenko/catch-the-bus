@@ -76,7 +76,7 @@ class Map extends React.Component {
                             onClose={this.onInfoWindowClose}
                             visible>
                             <div>
-                                <h2>{stops.name}</h2>
+                                <h2 className="marker-title">{stops.name}</h2>
                             </div>
                         </InfoWindow>
                     }
